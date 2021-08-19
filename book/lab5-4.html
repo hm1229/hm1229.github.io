@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>设备树 - rCore_Tutorial_Detail</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lab0.html"><strong aria-hidden="true">1.</strong> 实验零 RV64 裸机应用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab0-1.html"><strong aria-hidden="true">1.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab0-2.html"><strong aria-hidden="true">1.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab0-3.html"><strong aria-hidden="true">1.3.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab0-4.html"><strong aria-hidden="true">1.4.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab1.html"><strong aria-hidden="true">2.</strong> 实验一 中断处理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab1-1.html"><strong aria-hidden="true">2.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab1-2.html"><strong aria-hidden="true">2.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab1-3.html"><strong aria-hidden="true">2.3.</strong> 方法解析</a></li><li class="chapter-item expanded "><a href="lab1-4.html"><strong aria-hidden="true">2.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab1-5.html"><strong aria-hidden="true">2.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab2.html"><strong aria-hidden="true">3.</strong> 实验二 物理内存</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab2-1.html"><strong aria-hidden="true">3.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab2-2.html"><strong aria-hidden="true">3.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab2-3.html"><strong aria-hidden="true">3.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab2-4.html"><strong aria-hidden="true">3.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab2-5.html"><strong aria-hidden="true">3.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab3.html"><strong aria-hidden="true">4.</strong> 实验三 虚拟内存</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab3-1.html"><strong aria-hidden="true">4.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab3-2.html"><strong aria-hidden="true">4.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab3-3.html"><strong aria-hidden="true">4.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab3-4.html"><strong aria-hidden="true">4.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab3-5.html"><strong aria-hidden="true">4.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab4.html"><strong aria-hidden="true">5.</strong> 实验四 进程与线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab4-1.html"><strong aria-hidden="true">5.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab4-2.html"><strong aria-hidden="true">5.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab4-3.html"><strong aria-hidden="true">5.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab4-4.html"><strong aria-hidden="true">5.4.</strong> 实验步骤</a></li></ol></li><li class="chapter-item expanded "><a href="lab5.html"><strong aria-hidden="true">6.</strong> 实验五 文件系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab5-1.html"><strong aria-hidden="true">6.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab5-2.html"><strong aria-hidden="true">6.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab5-3.html"><strong aria-hidden="true">6.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab5-4.html" class="active"><strong aria-hidden="true">6.4.</strong> 设备树</a></li><li class="chapter-item expanded "><a href="lab5-5.html"><strong aria-hidden="true">6.5.</strong> 实验步骤</a></li></ol></li><li class="chapter-item expanded "><a href="lab6.html"><strong aria-hidden="true">7.</strong> 实验六 用户进程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab6-1.html"><strong aria-hidden="true">7.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab6-2.html"><strong aria-hidden="true">7.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab6-3.html"><strong aria-hidden="true">7.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab6-4.html"><strong aria-hidden="true">7.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab6-5.html"><strong aria-hidden="true">7.5.</strong> 总结</a></li></ol></li><li class="chapter-item expanded "><a href="lab7.html"><strong aria-hidden="true">8.</strong> 实验七 性能监控</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab7-1.html"><strong aria-hidden="true">8.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab7-2.html"><strong aria-hidden="true">8.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab7-3.html"><strong aria-hidden="true">8.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab7-4.html"><strong aria-hidden="true">8.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab7-5.html"><strong aria-hidden="true">8.5.</strong> 小结</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rCore_Tutorial_Detail</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="设备树"><a class="header" href="#设备树">设备树</a></h1>
+<h2 id="从哪里读取设备信息"><a class="header" href="#从哪里读取设备信息">从哪里读取设备信息</a></h2>
+<p>既然我们要实现把数据放在某个存储设备上并让操作系统来读取，首先操作系统就要有一个读取全部已接入设备信息的能力，而设备信息放在哪里又是谁帮我们来做的呢？这个问题其实在[物理内存探测]中就提到过，在 RISC-V 中，这个一般是由 bootloader，即 OpenSBI 固件完成的。它来完成对于包括物理内存在内的各外设的扫描，将扫描结果以**设备树二进制对象（DTB，Device Tree Blob）**的格式保存在物理内存中的某个地方。而这个放置的物理地址将放在 <code>a1</code> 寄存器中，而将会把 HART ID （<strong>HART，Hardware Thread，硬件线程，可以理解为执行的 CPU 核</strong>）放在 <code>a0</code> 寄存器上。</p>
+<p>在我们之前的函数中并没有使用过这两个参数，如果要使用，我们不需要修改任何入口汇编的代码，只需要给 <code>rust_main</code> 函数增加两个参数即可：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//os/src/main.rs
+/// Rust 的入口函数
+///
+/// 在 `_start` 为我们进行了一系列准备之后，这是第一个被调用的 Rust 函数
+#[no_mangle]
+pub extern &quot;C&quot; fn rust_main(_hart_id: usize, dtb_pa: PhysicalAddress) -&gt; ! {
+    memory::init();
+    interrupt::init();
+    println!(&quot;{:?}&quot;, dtb_pa);
+    ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>打印输出一下，<code>dtb_pa</code> 变量约在 0x82200000 （十进制：2183135232）附近，而内核结束的地址约为 0x80b17000，也就是在我们内核的后面放着，这意味着当我们内核代码超过 32MB 的时候就会出现问题，在更好的实现中，其实 OpenSBI 固件启动的应该是第二级小巧的 Bootloader，而我们现在全部内核内容都在内存中且也没 32MB 那么大，我们暂时不理会这个问题。</p>
+<h2 id="设备树-1"><a class="header" href="#设备树-1">设备树</a></h2>
+<p>上面提到 OpenSBI 固件会把设备信息以设备树的格式放在某个地址上，哪设备树格式究竟是怎样的呢？在各种操作系统中，我们打开设备管理器（Windows）和系统报告（macOS）等内置的系统软件就可以看到我们使用的电脑的设备树，一个典型的设备树如下图所示：</p>
+<p><img src="https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-5/pics/device-tree.png" alt="img" /></p>
+<p>每个设备在物理上连接到了父设备上最后再通过总线等连接起来构成一整个设备树，在每个节点上都描述了对应设备的信息，如支持的协议是什么类型等等。而操作系统就是通过这些节点上的信息来实现对设备的识别的。</p>
+<blockquote>
+<p><strong>设备节点属性</strong></p>
+<p>具体而言，一个设备节点上会有几个标准属性，这里简要介绍我们需要用到的几个：</p>
+<ul>
+<li>compatible：该属性指的是该设备的编程模型，一般格式为 &quot;manufacturer,model&quot;，分别指一个出厂标签和具体模型。如 &quot;virtio,mmio&quot; 指的是这个设备通过 virtio 协议、MMIO（内存映射 I/O）方式来驱动</li>
+<li>model：指的是设备生产商给设备的型号</li>
+<li>reg：当一些很长的信息或者数据无法用其他标准属性来定义时，可以用 reg 段来自定义存储一些信息</li>
+</ul>
+<p>设备树是一个比较复杂的标准，更多细节可以参考 <a href="https://elinux.org/Device_Tree_Reference">Device Tree Reference</a>。</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="lab5-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="lab5-5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="lab5-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="lab5-5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

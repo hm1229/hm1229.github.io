@@ -1,0 +1,852 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>实验步骤 - rCore_Tutorial_Detail</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lab0.html"><strong aria-hidden="true">1.</strong> 实验零 RV64 裸机应用</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab0-1.html"><strong aria-hidden="true">1.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab0-2.html"><strong aria-hidden="true">1.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab0-3.html"><strong aria-hidden="true">1.3.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab0-4.html"><strong aria-hidden="true">1.4.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab1.html"><strong aria-hidden="true">2.</strong> 实验一 中断处理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab1-1.html"><strong aria-hidden="true">2.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab1-2.html"><strong aria-hidden="true">2.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab1-3.html"><strong aria-hidden="true">2.3.</strong> 方法解析</a></li><li class="chapter-item expanded "><a href="lab1-4.html" class="active"><strong aria-hidden="true">2.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab1-5.html"><strong aria-hidden="true">2.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab2.html"><strong aria-hidden="true">3.</strong> 实验二 物理内存</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab2-1.html"><strong aria-hidden="true">3.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab2-2.html"><strong aria-hidden="true">3.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab2-3.html"><strong aria-hidden="true">3.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab2-4.html"><strong aria-hidden="true">3.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab2-5.html"><strong aria-hidden="true">3.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab3.html"><strong aria-hidden="true">4.</strong> 实验三 虚拟内存</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab3-1.html"><strong aria-hidden="true">4.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab3-2.html"><strong aria-hidden="true">4.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab3-3.html"><strong aria-hidden="true">4.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab3-4.html"><strong aria-hidden="true">4.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab3-5.html"><strong aria-hidden="true">4.5.</strong> 小结</a></li></ol></li><li class="chapter-item expanded "><a href="lab4.html"><strong aria-hidden="true">5.</strong> 实验四 进程与线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab4-1.html"><strong aria-hidden="true">5.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab4-2.html"><strong aria-hidden="true">5.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab4-3.html"><strong aria-hidden="true">5.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab4-4.html"><strong aria-hidden="true">5.4.</strong> 实验步骤</a></li></ol></li><li class="chapter-item expanded "><a href="lab5.html"><strong aria-hidden="true">6.</strong> 实验五 文件系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab5-1.html"><strong aria-hidden="true">6.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab5-2.html"><strong aria-hidden="true">6.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab5-3.html"><strong aria-hidden="true">6.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab5-4.html"><strong aria-hidden="true">6.4.</strong> 设备树</a></li><li class="chapter-item expanded "><a href="lab5-5.html"><strong aria-hidden="true">6.5.</strong> 实验步骤</a></li></ol></li><li class="chapter-item expanded "><a href="lab6.html"><strong aria-hidden="true">7.</strong> 实验六 用户进程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab6-1.html"><strong aria-hidden="true">7.1.</strong> 实验原理</a></li><li class="chapter-item expanded "><a href="lab6-2.html"><strong aria-hidden="true">7.2.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab6-3.html"><strong aria-hidden="true">7.3.</strong> 基础知识</a></li><li class="chapter-item expanded "><a href="lab6-4.html"><strong aria-hidden="true">7.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab6-5.html"><strong aria-hidden="true">7.5.</strong> 总结</a></li></ol></li><li class="chapter-item expanded "><a href="lab7.html"><strong aria-hidden="true">8.</strong> 实验七 性能监控</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lab7-1.html"><strong aria-hidden="true">8.1.</strong> 实验目的</a></li><li class="chapter-item expanded "><a href="lab7-2.html"><strong aria-hidden="true">8.2.</strong> 知识储备</a></li><li class="chapter-item expanded "><a href="lab7-3.html"><strong aria-hidden="true">8.3.</strong> 方案解析</a></li><li class="chapter-item expanded "><a href="lab7-4.html"><strong aria-hidden="true">8.4.</strong> 实验步骤</a></li><li class="chapter-item expanded "><a href="lab7-5.html"><strong aria-hidden="true">8.5.</strong> 小结</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rCore_Tutorial_Detail</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="实验步骤"><a class="header" href="#实验步骤">实验步骤</a></h1>
+<p>对于用户程序而言，中断的处理应当是不留任何痕迹的：只要中断处理改动了一个寄存器，都可能导致原本正在运行的线程出现错误。因此，在处理中断之前，必须要保存所有可能被修改的寄存器，并且在处理完成后恢复。因此，我们需要保存所有通用寄存器，<code>sepc</code>、<code>scause</code> 和 <code>stval</code> 这三个会被硬件自动写入的 CSR 寄存器，以及 <code>sstatus</code>。因为中断可能会涉及到权限的切换，以及中断的开关，这些都会修改 <code>sstatus</code>。</p>
+<h2 id="保存进程上下文"><a class="header" href="#保存进程上下文">保存进程上下文</a></h2>
+<p>从执行中的程序的角度来讲，该程序不应该感知到操作系统发生了中断。这需要在中断前后维持系统的上下文不变。</p>
+<p>创造一个结构体变量Context，使其来存储进程上下文所用到的寄存器信息。但只存储信息还不够，还需要对信息进行保存与恢复。由于涉及到寄存器的操作，由于不能用Rust语言直接完成，在这里将使用汇编语言，将寄存器的值存储在Context中，如图。</p>
+<p>上文已经成功存储了中断时的上下文信息，但为了能够主动的处理中断，还应编写一个负责识别和处理中断的函数。使用汇编将Context当部分信息，取代的是将堆栈指针指向由进程处理程序所使用的临时堆栈</p>
+<p>3）对进程中断所进行的操作均由进程处理程序负责处理，作为操作系统的服务例程，可以为所有的进程中断使用</p>
+<p>4）例程结束后，调用特定过程完成剩下的操作。</p>
+<p>同时中断分为异常、陷阱、硬件中断。异常是执行指令时产生的无法预料的错误，如无效的内存访问或者非法的指令等。陷阱是一种强行导致中断的指令，如系统调用。硬件中断是由CPU之外的硬件产生的异步中断，比如时钟中断，外设中断等。</p>
+<p>如何判断中断的类型，并对不同的中断进行相应的响应是目前需要解决的问题。</p>
+<h2 id="恢复进程上下文"><a class="header" href="#恢复进程上下文">恢复进程上下文</a></h2>
+<p>现在已经完成了中断的处理，需要恢复上下文为中断前的样子。</p>
+<p>如果进程中断返回后，处于就绪状态，则调用进程调度程序，决定下阶段调度哪个进程运行；如果调度该进程处于运行状态，则计算机将控制转交给一段例程，由该例程为当前可以运行的进程装入寄存器值，并实现对内存的映射，启动该进程运行；如果进程中断返回后，仍需要等待其他底层服务，则执行到该服务调用处，继续重复中断过程。</p>
+<p>这里还是使用汇编语言，将上下文中的信息全部恢复至计算器上，并转跳至consent中的位置。</p>
+<h3 id="context-实现进程上下文的保存"><a class="header" href="#context-实现进程上下文的保存">Context-实现进程上下文的保存</a></h3>
+<p>我们把在中断时保存了各种寄存器的结构体叫做 <code>Context</code>，他表示原来程序正在执行所在的上下文（这个概念在后面线程的部分还会用到），这里我们和 <code>scause</code> 以及 <code>stval</code> 作为一个区分，后两者将不会放在 <code>Context</code> 而仅仅被看做一个临时的变量（在后面会被用到），<code>Context</code> 的定义如下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// os/src/interrupt/context.rs
+use riscv::register::{sstatus::Sstatus, scause::Scause};
+
+#[repr(C)]				// repr(C)来确保在 Rust 中，该结构体的内存布局与在 C 中相同。
+#[derive(Debug)]		    //使结构体可以打印
+pub struct Context {
+    pub x: [usize; 32],     // 32 个通用寄存器
+    pub sstatus: Sstatus,	// 系统状态
+    pub sepc: usize			//触发中断的指令地址
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p><strong>repr(Rust)</strong>
+首先，每种类型都有一个数据对齐属性 (alignment)。一种类型的对齐属性决定了哪些内存地址可以合法地存储该类型的值。如果对齐属性是 n，那么它的值的存储地址必须是 n 的倍数。所以，对齐属性 2 表示值只能存储在偶数地址里，1 表示值可以存储在任何的地方。对齐属性最小为 1，并且永远是 2 的整数次幂。虽然不同平台的行为可能会不同，但大部分情况下基础类型都是按照它的类型大小对齐的。特别的是，在 x86 平台上 u64 和 f64 都是按照 32 位对齐的。</p>
+<p>一种类型的大小都是它对齐属性的整数倍，这保证了这种类型的值在数组中的偏移量都是其类型尺寸的整数倍，可以按照偏移量进行索引。需要注意的是，动态尺寸类型的大小和对齐可能无法静态获取。</p>
+<p><strong>repr(C)</strong>
+这是最重要的一种 repr。它的目的很简单，就是和 C 保持一致。数据的顺序、大小、对齐方式都和你在 C 或 C++ 中见到的一摸一样。所有你需要通过 FFI 交互的类型都应该有 repr(C)，因为 C 是程序设计领域的世界语。而且如果我们要在数据布局方面玩一些花活的话，比如把数据重新解析成另一种类型，repr(C) 也是很有必要的。</p>
+</blockquote>
+<p>这里我们使用了 rCore 中的库 riscv 封装的一些寄存器操作，需要在 <code>os/Cargo.toml</code> 中添加依赖。</p>
+<pre><code class="language-toml"># /os/Cargo.toml
+[dependencies]
+riscv = { git = &quot;https://github.com/rcore-os/riscv&quot;, features = [&quot;inline-asm&quot;] }
+</code></pre>
+<blockquote>
+<p>如果这个依赖下载缓慢的话，尝试在<code>.cargo/config</code>中添加：</p>
+<pre><code class="language-toml">[source.crates-io]
+registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+replace-with = 'ustc'
+[source.ustc]
+registry = &quot;git://mirrors.ustc.edu.cn/crates.io-index&quot;
+</code></pre>
+</blockquote>
+<h2 id="状态的保存与恢复"><a class="header" href="#状态的保存与恢复">状态的保存与恢复</a></h2>
+<h3 id="操作流程"><a class="header" href="#操作流程">操作流程</a></h3>
+<p>为了状态的保存与恢复，我们可以先用栈上的一小段空间来把需要保存的全部通用寄存器和 CSR 寄存器保存在栈上，保存完之后在跳转到 Rust 编写的中断处理函数；而对于恢复，则直接把备份在栈上的内容写回寄存器。由于涉及到了寄存器级别的操作，我们需要用汇编来实现。</p>
+<p>而对于如何保存在栈上，我们可以直接令 <code>sp</code> 栈寄存器直接减去相应需要开辟的大小，然后依次放在栈上。需要注意的是，<code>sp</code> 寄存器又名 <code>x2</code>，我们需要不断用到这个寄存器告诉 CPU 其他寄存器放在哪个地址，所以处理这个 <code>sp</code> 寄存器本身的保存时也需要格外小心。</p>
+<h3 id="编写汇编"><a class="header" href="#编写汇编">编写汇编</a></h3>
+<p>因为汇编代码较长，这里我们新建一个 <code>os/src/interrupt/interrupt.asm</code> 文件来编写这段操作：</p>
+<pre><code class="language-asm"># os/src/interrupt/interrupt.asm
+# 我们将会用一个宏来用循环保存寄存器。这是必要的设置
+.altmacro
+# 寄存器宽度对应的字节数
+.set    REG_SIZE, 8
+# Context 的大小
+.set    CONTEXT_SIZE, 34
+
+# 宏：将寄存器存到栈上
+.macro SAVE reg, offset
+    sd  \reg, \offset*8(sp)
+.endm
+
+.macro SAVE_N n
+    SAVE  x\n, \n		#\n使将n转义为n的值，其它同理
+.endm
+
+
+# 宏：将寄存器从栈中取出
+.macro LOAD reg, offset
+    ld  \reg, \offset*8(sp)
+.endm
+
+.macro LOAD_N n
+    LOAD  x\n, \n     
+.endm
+
+    .section .text
+    .globl __interrupt
+# 进入中断
+# 保存 Context 并且进入 Rust 中的中断处理函数 interrupt::handler::handle_interrupt()
+__interrupt:
+    # 在栈上开辟 Context 所需的空间
+    addi    sp, sp, -34*8
+
+    # 保存通用寄存器，除了 x0（固定为 0）
+    SAVE    x1, 1
+    # 将原来的 sp（sp 又名 x2）写入 2 位置
+    addi    x1, sp, 34*8
+    SAVE    x1, 2
+    # 保存 x3 至 x31
+    .set    n, 3
+    .rept   29
+        SAVE_N  %n
+        .set    n, n + 1
+    .endr
+
+    # 取出 CSR 并保存
+    csrr    s1, sstatus
+    csrr    s2, sepc
+    SAVE    s1, 32
+    SAVE    s2, 33
+
+    # 调用 handle_interrupt，传入参数
+    # context: &amp;mut Context
+    mv      a0, sp
+    # scause: Scause
+    csrr    a1, scause
+    # stval: usize
+    csrr    a2, stval
+    jal  handle_interrupt
+
+    .globl __restore
+# 离开中断
+# 从 Context 中恢复所有寄存器，并跳转至 Context 中 sepc 的位置
+__restore:
+    # 恢复 CSR
+    LOAD    s1, 32
+    LOAD    s2, 33
+    csrw    sstatus, s1
+    csrw    sepc, s2
+
+    # 恢复通用寄存器
+    LOAD    x1, 1
+    # 恢复 x3 至 x31
+    .set    n, 3
+    .rept   29
+        LOAD_N  %n
+        .set    n, n + 1
+    .endr
+
+    # 恢复 sp（又名 x2）这里最后恢复是为了上面可以正常使用 LOAD 宏
+    LOAD    x2, 2
+    sret
+</code></pre>
+<p>这样的话我们就完成了对当前执行现场保存，我们把 <code>Context</code> 以及 <code>scause</code> 和 <code>stval</code> 作为参数传入了 <code>handle_interrupt</code> 函数中，这是一个 Rust 编写的函数，后面我们将会实现它。</p>
+<p><a href="http://c.biancheng.net/view/3714.html">汇编宏的定义以及相关语法参考</a></p>
+<p>RISC-V 和 GNU 使用<code>.</code>作为保留字前缀</p>
+<p>[<code>.section</code>的作用]</p>
+<blockquote>
+<h3 id="汇编语法ld"><a class="header" href="#汇编语法ld">汇编语法<strong>ld</strong></a></h3>
+<p>ld rd, offset(rs1) </p>
+<p>x[rd] = M[x[rs1] + (sext(offset)] [63:0]) 双字加载 (Load Doubleword). I-type, RV32I and RV64I. 从地址 x[rs1] + sign-extend(offset)读取八个字节，写入 x[rd]。</p>
+<h3 id="汇编语法sd"><a class="header" href="#汇编语法sd">汇编语法sd</a></h3>
+<p>sd rs2, offset(rs1) </p>
+<p>x[rs1] + sext(offset) = x [rs2] [63: 0] 存双字(Store Doubleword). S-type, RV64I only. 将 x[rs2]中的 8 字节存入内存地址 x[rs1]+sign-extend(offset)。</p>
+</blockquote>
+<p>这样的话我们就完成了对当前执行现场保存，我们把 <code>Context</code> 以及 <code>scause</code> 和 <code>stval</code> 作为参数传入了 <code>handle_interrupt</code> 函数中，这是一个 Rust 编写的函数，后面我们将会实现它。</p>
+<blockquote>
+<p><a href="http://c.biancheng.net/view/3714.html">汇编宏的定义以及相关语法参考</a></p>
+<p>RISC-V 和 GNU 使用<code>.</code>作为保留字前缀</p>
+<p><a href="http://blog.chinaunix.net/uid-28458801-id-3554757.html"><code>.section</code>的作用</a></p>
+</blockquote>
+<h2 id="实现一个陷入处理流程"><a class="header" href="#实现一个陷入处理流程">实现一个陷入处理流程</a></h2>
+<p>接下来，我们将要手动触发一个 Trap（<code>ebreak</code>），并且进入中断处理流程。</p>
+<h3 id="初始化相关寄存器"><a class="header" href="#初始化相关寄存器">初始化相关寄存器</a></h3>
+<p>为了让硬件能够找到我们编写的 <code>__interrupt</code> 入口，在操作系统初始化时，需要将其写入 <code>stvec</code> 寄存器中：</p>
+<blockquote>
+<h4 id="设置内核态中断响应的入口寄存器"><a class="header" href="#设置内核态中断响应的入口寄存器">设置内核态中断响应的入口寄存器</a></h4>
+<ul>
+<li><code>stvec</code>
+设置内核态中断处理流程的入口地址。存储了一个基址 BASE 和模式 MODE：
+<ul>
+<li>MODE 为 0 表示 Direct 模式，即遇到中断便跳转至 BASE 进行执行。</li>
+<li>MODE 为 1 表示 Vectored 模式，此时 BASE 应当指向一个向量，存有不同处理流程的地址，遇到中断会跳转至 <code>BASE + 4 * cause</code> 进行处理流程。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/handler.rs
+use super::context::Context;
+use riscv::register::{
+    scause::{Exception, Interrupt, Scause, Trap},
+    stvec,
+};
+
+global_asm!(include_str!(&quot;./interrupt.asm&quot;));
+
+/// 初始化中断处理
+///
+/// 把中断入口 `__interrupt` 写入 `stvec` 中，并且开启中断使能
+pub fn init() {
+    unsafe {
+        extern &quot;C&quot; {
+            /// `interrupt.asm` 中的中断入口
+            fn __interrupt();
+        }
+        // 使用 Direct 模式，将中断入口设置为 `__interrupt`
+        stvec::write(__interrupt as usize, stvec::TrapMode::Direct);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<h2 id="unsafe"><a class="header" href="#unsafe"><strong><code>unsafe</code></strong></a></h2>
+<p>目前为止讨论过的代码都有 Rust 在编译时会强制执行的内存安全保证。然而，Rust 还隐藏有第二种语言，它不会强制执行这类内存安全保证：这被称为 <strong>不安全 Rust</strong>（<em>unsafe Rust</em>）。它与常规 Rust 代码无异，但是会提供额外的超级力量。</p>
+<p>不安全 Rust 之所以存在，是因为静态分析本质上是保守的。当编译器尝试确定一段代码是否支持某个保证时，拒绝一些有效的程序比接受无效程序要好一些。这必然意味着有时代码可能是合法的，但是 Rust 不这么认为！在这种情况下，可以使用不安全代码告诉编译器，“相信我，我知道我在干什么。”这么做的缺点就是你只能靠自己了：如果不安全代码出错了，比如解引用空指针，可能会导致不安全的内存使用。</p>
+<p>另一个 Rust 存在不安全一面的原因是：底层计算机硬件固有的不安全性。如果 Rust 不允许进行不安全操作，那么有些任务则根本完成不了。Rust 需要能够进行像直接与操作系统交互，甚至于编写你自己的操作系统这样的底层系统编程！这也是 Rust 语言的目标之一。</p>
+</blockquote>
+<h3 id="处理中断"><a class="header" href="#处理中断">处理中断</a></h3>
+<p>然后，我们再补上 <code>__interrupt</code> 后跳转的中断处理流程 <code>handle_interrupt()</code>：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/handler.rs
+/// 中断的处理入口
+/// 
+/// `interrupt.asm` 首先保存寄存器至 Context，其作为参数和 scause 以及 stval 一并传入此函数
+/// 具体的中断类型需要根据 scause 来推断，然后分别处理
+/// 目前我们能做的只有panic！
+#[no_mangle]
+pub fn handle_interrupt(context: &amp;mut Context, scause: Scause, stval: usize) {
+    panic!(&quot;Interrupted: {:?}&quot;, scause.cause());
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<h3 id="完整代码"><a class="header" href="#完整代码">完整代码</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/handler.rs
+use super::context::Context;
+use riscv::register::{
+	scause::{Exception, Interrupt, Scause, Trap},
+	stvec,
+};
+
+global_asm!(include_str!(&quot;./interrupt.asm&quot;));
+
+/// 初始化中断处理
+///
+/// 把中断入口 `__interrupt` 写入 `stvec` 中，并且开启中断使能
+pub fn init() {
+  unsafe {
+   extern &quot;C&quot; {
+          /// `interrupt.asm` 中的中断入口
+       fn __interrupt();
+  }
+   // 使用 Direct 模式，将中断入口设置为 `__interrupt`
+  stvec::write(__interrupt as usize, stvec::TrapMode::Direct);
+	}
+}
+
+/// 中断的处理入口
+///
+/// `interrupt.asm` 首先保存寄存器至 Context，其作为参数和 scause 以及 stval 一并传入此函数
+/// 具体的中断类型需要根据 scause 来推断，然后分别处理
+/// 目前我们能做的只有panic！
+#[no_mangle]
+pub fn handle_interrupt(context: &amp;mut Context, scause: Scause, stval: usize) {
+	panic!(&quot;Interrupted: {:?}&quot;, scause.cause());
+}
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<h3 id="触发中断"><a class="header" href="#触发中断">触发中断</a></h3>
+<p>最后，我们把刚刚写的函数声明一下：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! os/src/interrupt/mod.rs
+//! 中断模块
+//! 
+//! 
+
+mod handler;
+mod context;
+
+pub use context::Context;
+
+/// 初始化中断相关的子模块
+/// 
+/// - [`handler::init`]
+/// - [`timer::init`]
+pub fn init() {
+    handler::init();    //调用中断处理初始化函数
+    println!(&quot;中断处理初始化成功&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>同时，我们在 main 函数中主动使用 <code>ebreak</code> 来触发一个中断。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// /os/src/main.rs
+...
+mod interrupt;
+...
+
+/// Rust 的入口函数
+///
+/// 在 `_start` 为我们进行了一系列准备之后，这是第一个被调用的 Rust 函数
+pub extern &quot;C&quot; fn rust_main() -&gt; ! {
+    // 初始化各种模块
+    interrupt::init();          //初始化中断处理模块
+
+    unsafe {
+        llvm_asm!(&quot;ebreak&quot;::::&quot;volatile&quot;);   //触发中断
+    };
+
+    println!(&quot;Hello rCore-Tutorial!&quot;);
+    
+    panic!(&quot;end of rust_main&quot;)
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>运行一下，可以看到 <code>ebreak</code> 导致程序进入了中断处理并退出，而没有执行到后面的 <code>unreachable!()</code>：</p>
+<p>运行输出</p>
+<pre><code>Hello rCore-Tutorial!
+mod interrupt initialized
+panic: 'Interrupted: Exception(Breakpoint)
+</code></pre>
+<h2 id="时钟中断"><a class="header" href="#时钟中断">时钟中断</a></h2>
+<p>本章的最后，我们来实现操作系统中极其重要的时钟中断。时钟中断可以把一些例行的及需要定时执行的程序放在时钟中断中，还可以利用时钟中断协助主程序完成定时、延时等操作，是操作系统能够进行线程调度的基础，操作系统会在每次时钟中断时被唤醒，暂停正在执行的线程，并根据调度算法选择下一个应当运行的线程。</p>
+<blockquote>
+<p><strong>RISC-V 中断寄存器的细分</strong></p>
+<p>在前面提到，<code>sie</code> 和 <code>sip</code> 寄存器分别保存不同中断种类的使能和触发记录。例如，软件中断的使能是 <code>sie</code> 中的 SSIE 位，触发记录是 <code>sip</code> 中的 SSIP 位。</p>
+<p>RISC-V 中将中断分为三种：</p>
+<ul>
+<li>软件中断（Software Interrupt），对应 SSIE 和 SSIP</li>
+<li>时钟中断（Timer Interrupt），对应 STIE 和 STIP</li>
+<li>外部中断（External Interrupt），对应 SEIE 和 SEIP</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><code>sie</code> 即 Supervisor Interrupt Enable，用来控制具体类型中断的使能，例如其中的 STIE 控制时钟中断使能。</p>
+<p><code>sip</code> 即 Supervisor Interrupt Pending，和 <code>sie</code> 相对应，记录每种中断是否被触发。仅当 <code>sie</code> 和 <code>sip</code> 的对应位都为 1 时，意味着开中断且已发生中断，这时中断最终触发。</p>
+</blockquote>
+<h3 id="开启时钟中断"><a class="header" href="#开启时钟中断">开启时钟中断</a></h3>
+<p>时钟中断也需要我们在初始化操作系统时开启，我们同样只需使用 riscv 库中提供的接口即可。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! os/src/interrupt/timer.rs
+//! 预约和处理时钟中断
+
+use crate::sbi::set_timer;
+use riscv::register::{time, sie, sstatus};
+
+/// 初始化时钟中断
+/// 
+/// 开启时钟中断使能，并且预约第一次时钟中断
+pub fn init() {
+    unsafe {
+        // 开启 STIE，允许时钟中断
+        sie::set_stimer(); 
+        // 开启 SIE（不是 sie 寄存器），允许内核态被中断打断
+        sstatus::set_sie();
+    }
+    // 设置下一次时钟中断
+    set_next_timeout();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这里可能引起误解的是 <code>sstatus::set_sie()</code>，它的作用是开启 <code>sstatus</code> 寄存器中的 SIE 位，与 <code>sie</code> 寄存器无关。SIE 位决定中断是否能够打断 <strong>supervisor 线程</strong>。在这里我们需要允许时钟中断打断<strong>内核态线程</strong>，因此置 SIE 位为 1。
+另外，无论 SIE 位为什么值，中断都可以打断<strong>用户态的线程</strong>。</p>
+<h3 id="设置时钟中断"><a class="header" href="#设置时钟中断">设置时钟中断</a></h3>
+<p>每一次的时钟中断都需要操作系统设置一个下一次中断的时间，这样硬件会在指定的时间发出时钟中断。为简化操作系统实现，操作系统可请求（<code>sbi_call</code> 调用 <code>ecall</code> 指令）SBI 服务来完成时钟中断的设置。OpenSBI 固件在接到 SBI 服务请求后，会帮助 OS 设置下一次要触发时钟中断的时间，CPU 在执行过程中会检查当前的时间间隔是否已经超过设置的时钟中断时间间隔，如果超时则会触发时钟中断。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/sbi.rs
+/// 设置下一次时钟中断的时间
+pub fn set_timer(time: usize) {
+    sbi_call(SBI_SET_TIMER, time, 0, 0);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了便于后续处理，我们设置时钟间隔为 100000 个 CPU 周期。越短的间隔可以让 CPU 调度资源更加细致，但同时也会导致更多资源浪费在操作系统上。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/timer.rs
+/// 时钟中断的间隔，单位是 CPU 指令
+static INTERVAL: usize = 100000;
+
+/// 设置下一次时钟中断
+/// 
+/// 获取当前时间，加上中断间隔，通过 SBI 调用预约下一次中断
+fn set_next_timeout() {
+    set_timer(time::read() + INTERVAL);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<h3 id="cpu周期"><a class="header" href="#cpu周期">CPU周期</a></h3>
+<p>机器周期也称为CPU周期。在计算机中，为了便于管理，常把一条指令的执行过程划分为若干个阶段（如取指、译码、执行等），每一阶段完成一个基本操作。完成一个基本操作所需要的时间称为机器周期</p>
+</blockquote>
+<p>由于没有一个接口来设置固定重复的时间中断间隔，因此我们需要在每一次时钟中断时，设置再下一次的时钟中断。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/timer.rs
+/// 触发时钟中断计数
+pub static mut TICKS: usize = 0;
+
+/// 每一次时钟中断时调用
+/// 
+/// 设置下一次时钟中断，同时计数 +1
+pub fn tick() {
+    set_next_timeout();
+    unsafe {
+        TICKS += 1;
+        if TICKS % 100 == 0 {
+            println!(&quot;{} ticks&quot;, TICKS);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>完整的 timer.rs </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! os/src/interrupt/timer.rs
+//! 预约和处理时钟中断
+
+use crate::sbi::set_timer;
+use riscv::register::{time, sie, sstatus};
+
+/// 初始化时钟中断
+/// 
+/// 开启时钟中断使能，并且预约第一次时钟中断
+pub fn init() {
+    unsafe {
+        // 开启 STIE，允许时钟中断
+        sie::set_stimer();
+        // 开启 SIE（不是 sie 寄存器），允许内核态被中断打断
+        sstatus::set_sie();
+    }
+    // 设置下一次时钟中断
+    set_next_timeout();
+}
+
+/// 时钟中断的间隔，单位是 CPU 指令
+static INTERVAL: usize = 100000;
+
+/// 设置下一次时钟中断
+/// 
+/// 获取当前时间，加上中断间隔，通过 SBI 调用预约下一次中断
+fn set_next_timeout() {
+    set_timer(time::read() + INTERVAL);
+}
+
+/// 触发时钟中断计数
+pub static mut TICKS: usize = 0;
+
+/// 每一次时钟中断时调用
+///
+/// 设置下一次时钟中断，同时计数 +1
+pub fn tick() {
+    set_next_timeout();
+    unsafe {
+        TICKS += 1;
+        if TICKS % 100 == 0 {
+            println!(&quot;{} ticks&quot;, TICKS);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>完整的sbi.rs</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//os/src/sbi.rs
+//! 调用 Machine 层的操作
+// 目前还不会用到全部的 SBI 调用，暂时允许未使用的变量或函数
+#![allow(unused)]
+
+/// SBI 调用
+#[inline(always)]
+fn sbi_call(which: usize, arg0: usize, arg1: usize, arg2: usize) -&gt; usize {
+    let ret;
+    unsafe {
+        llvm_asm!(&quot;ecall&quot;
+            : &quot;={x10}&quot; (ret)
+            : &quot;{x10}&quot; (arg0), &quot;{x11}&quot; (arg1), &quot;{x12}&quot; (arg2), &quot;{x17}&quot; (which)
+            : &quot;memory&quot;      // 如果汇编可能改变内存，则需要加入 memory 选项
+            : &quot;volatile&quot;);  // 防止编译器做激进的优化（如调换指令顺序等破坏 SBI 调用行为的优化）
+    }
+    ret
+}
+
+
+const SBI_SET_TIMER: usize = 0;
+const SBI_CONSOLE_PUTCHAR: usize = 1;
+const SBI_CONSOLE_GETCHAR: usize = 2;
+const SBI_CLEAR_IPI: usize = 3;
+const SBI_SEND_IPI: usize = 4;
+const SBI_REMOTE_FENCE_I: usize = 5;
+const SBI_REMOTE_SFENCE_VMA: usize = 6;
+const SBI_REMOTE_SFENCE_VMA_ASID: usize = 7;
+const SBI_SHUTDOWN: usize = 8;
+
+/// 向控制台输出一个字符
+///
+/// 需要注意我们不能直接使用 Rust 中的 char 类型
+pub fn console_putchar(c: usize) {
+    sbi_call(SBI_CONSOLE_PUTCHAR, c, 0, 0);
+}
+
+/// 从控制台中读取一个字符
+///
+/// 没有读取到字符则返回 -1
+pub fn console_getchar() -&gt; usize {
+    sbi_call(SBI_CONSOLE_GETCHAR, 0, 0, 0)
+}
+
+/// 调用 SBI_SHUTDOWN 来关闭操作系统（直接退出 QEMU）
+pub fn shutdown() -&gt; ! {
+    sbi_call(SBI_SHUTDOWN, 0, 0, 0);
+    unreachable!()
+}
+
+/// 设置下一次时钟中断的时间
+pub fn set_timer(time: usize) {
+    sbi_call(SBI_SET_TIMER, time, 0, 0);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="实现时钟中断的处理流程"><a class="header" href="#实现时钟中断的处理流程">实现时钟中断的处理流程</a></h3>
+<p>接下来，我们在 <code>handle_interrupt()</code> 根据不同中断种类进行不同的处理流程。（</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// os/src/interrupt/handler.rs
+use super::context::Context;
+use super::timer;
+use riscv::register::{
+    scause::{Exception, Interrupt, Scause, Trap},
+    sie, stvec,
+};
+global_asm!(include_str!(&quot;./interrupt.asm&quot;));
+
+/// 初始化中断处理
+///
+/// 把中断入口 `__interrupt` 写入 `stvec` 中，并且开启中断使能
+pub fn init() {
+    unsafe {
+        extern &quot;C&quot; {
+            /// `interrupt.asm` 中的中断入口
+            fn __interrupt();
+        }
+        // 使用 Direct 模式，将中断入口设置为 `__interrupt`
+        stvec::write(__interrupt as usize, stvec::TrapMode::Direct);
+    }
+}
+
+/// 中断的处理入口
+/// 
+/// `interrupt.asm` 首先保存寄存器至 Context，其作为参数和 scause 以及 stval 一并传入此函数
+/// 具体的中断类型需要根据 scause 来推断，然后分别处理
+#[no_mangle]
+pub fn handle_interrupt(context: &amp;mut Context, scause: Scause, stval: usize) {
+    // 可以通过 Debug 来查看发生了什么中断
+    // println!(&quot;{:x?}&quot;, context.scause.cause());
+    //对不同中断分开处理
+    match scause.cause() {
+        // 断点中断（ebreak）
+        Trap::Exception(Exception::Breakpoint) =&gt; breakpoint(context),
+        // 时钟中断
+        Trap::Interrupt(Interrupt::SupervisorTimer) =&gt; supervisor_timer(context),
+        // 其他情况，终止当前线程
+        _ =&gt; fault(context, scause, stval),
+    }
+}
+
+
+/// 处理 ebreak 断点
+/// 
+/// 继续执行，其中 `sepc` 增加 2 字节，以跳过当前这条 `ebreak` 指令
+fn breakpoint(context: &amp;mut Context) {
+    println!(&quot;Breakpoint at 0x{:x}&quot;, context.sepc);
+    context.sepc += 2;
+}
+
+/// 处理时钟中断
+/// 
+/// 目前只会在 [`timer`] 模块中进行计数
+fn supervisor_timer(_: &amp;Context) {
+    timer::tick();
+}
+
+/// 出现未能解决的异常，打印出触发异常的数据
+fn fault(context: &amp;mut Context, scause: Scause, stval: usize) {
+    panic!(
+        &quot;Unresolved interrupt: {:?}\n{:x?}\nstval: {:x}&quot;,
+        scause.cause(),
+        context,
+        stval
+    );
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<h3 id="match-控制流运算符"><a class="header" href="#match-控制流运算符"><code>match</code> 控制流运算符</a></h3>
+<p>Rust 有一个叫做 <code>match</code> 的极为强大的控制流运算符，它允许我们将一个值与一系列的模式相比较，并根据相匹配的模式执行相应代码。模式可由字面值、变量、通配符和许多其他内容构成；</p>
+<h3 id="强制类型转换-as-"><a class="header" href="#强制类型转换-as-">强制类型转换 <code>as</code> ：</a></h3>
+<p>只能转换基本数据类型 ，结构体类型只能转换指针，不能转换结构体引用</p>
+</blockquote>
+<p>在我们测试时钟中断之前，我们要将新写的<code>timer.rs</code>  声明一下</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//! os/src/interrupt/mod.rs
+//! 中断模块
+//! 
+//! 
+
+mod handler;
+mod context;
+mod timer;
+
+pub use context::Context;
+
+/// 初始化中断相关的子模块
+/// 
+/// - [`handler::init`]
+/// - [`timer::init`]
+pub fn init() {
+    handler::init();    //调用中断处理初始化函数
+    timer::init();      //调用时钟中断
+    println!(&quot;中断处理初始化成功&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>最后，我们来测试时钟中断：</p>
+<p>只需将结尾的panic！改为loop{},目的是让操作系统不关机，不断地死循环，因此我们就可以看到系统不断地在触发时钟中断了。</p>
+<p>运行输出</p>
+<pre><code>Finished dev [unoptimized + debuginfo] target(s) in 0.20s
+
+OpenSBI v0.6
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ &lt; | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name          : QEMU Virt Machine
+Platform HART Features : RV64ACDFIMSU
+Platform Max HARTs     : 8
+Current Hart           : 0
+Firmware Base          : 0x80000000
+Firmware Size          : 120 KB
+Runtime SBI Version    : 0.2
+
+MIDELEG : 0x0000000000000222
+MEDELEG : 0x000000000000b109
+PMP0    : 0x0000000080000000-0x000000008001ffff (A)
+PMP1    : 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+中断处理初始化成功
+Breakpoint at 0x80201134
+Hello rCore-Tutorial!
+100 ticks
+200 ticks
+300 ticks
+400 ticks
+...
+</code></pre>
+<p>同样可以使用 <code>ctrl+a</code> （macOS 为 <code>control+a</code>） 再按下 <code>x</code> 键退出。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="lab1-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="lab1-5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="lab1-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="lab1-5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
