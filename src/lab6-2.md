@@ -1,9 +1,5 @@
-# 方案解析
+# 基础知识
 
-要实现解析elf文件并创建系统，我们首先需要读写器的文件内容读取文件内容后来进行各个字段解析，并把其加入到内存中。
+1. [rCore 文件系统分析](https://rcore-os.github.io/rCore_tutorial_doc/chapter9/figures/rcore_fs_analysis.pdf)
+2. [xv6 文件系统分析](https://rcore-os.github.io/rCore_tutorial_doc/chapter9/figures/xv6_fs_analysis.pdf)
 
-像` sbi_call`一样，我们只需传递符合规则的参数，即可在用户程序中使用系统调用,以此我们来实现避免忙等待的功能。
-
-我们将遇到系统调用时，直接将缓冲区的字符通过sbi调用打印出去就完成了输出流。当遇到系统调用时，通过中断获得一些方式获得字符，直到约定长度速算返回就完成了输入流。
-
-因为输入是随机的，所以需要操作系统随时对外部中断进行处理。我们只需打开sbi的外部中断，并使其来处理信息，对外界输入进行响应。
