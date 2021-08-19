@@ -1,0 +1,6 @@
+[book]
+authors = ["weixin_53305890"]
+language = "en"
+multilingual = false
+src = "src"
+title = "rCore_Tutorial_Detail"
