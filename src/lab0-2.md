@@ -6,7 +6,7 @@
 
 ### 环境栈
 
-![../_images/app-software-stack.png](http://wyfcyx.gitee.io/rcore-tutorial-book-v3/_images/app-software-stack.png)
+![../_images/app-software-stack.png](F:\rCoreBook\hm1229.github.io\book\资源文件\实验零.assets\百度网盘.lnk)
 
 *应用程序执行环境栈：图中的白色块自上而下（越往下则越靠近底层，下层作为上层的执行环境支持上层代码的运行）表示各级**执行环境**， 黑色块则表示相邻两层执行环境之间的**接口**。
 
@@ -86,7 +86,7 @@ write(1, "Hello, world!\n", 14)         = 14
 
 ### 编译流程
 
-![image-20210817121751032](F:\rCore\rcore-tutorial-detail\资源文件\实验一.assets\image-20210817121751032.png)
+![image-20210817121751032](F:\rCoreBook\hm1229.github.io\book\资源文件\实验零.assets\image-20210817121751032.png)
 
 我们可以将常说的编译流程细化为多个阶段（虽然输入一条命令便可将它们全部完成）：
 
@@ -109,11 +109,11 @@ write(1, "Hello, world!\n", 14)         = 14
 
 ### 可执行文件进入内存并执行
 
-![image-20210818115711049](F:\rCore\rcore-tutorial-detail\资源文件\实验一.assets\image-20210818115711049.png)
+![image-20210818115711049](F:\rCoreBook\hm1229.github.io\book\资源文件\实验零.assets\image-20210818115711049.png)
 
 操作系统内核程序不同于应用程序，由于我们之前移除了标准库依赖和运行时的环境依赖，所以没有相应的系统调用接口（应用程序的执行如下图），内核程序只能选择SBI进行加载。
 
-![image-20210818180850429](F:\rCore\rcore-tutorial-detail\资源文件\实验一.assets\image-20210818180850429.png)
+![image-20210818180850429](F:\rCoreBook\hm1229.github.io\book\资源文件\实验零.assets\image-20210818180850429.png)
 
 对于 OS 内核，一般都将其地址空间放在高地址上。并且在 QEMU 模拟的 RISC-V 中，DRAM 内存的物理地址是从 0x80000000 开始，有 128MB 大小（如想进一步了解，可参看 `qemu/hw/riscv/virt.c` 中的 `VIRT_DRAM` 的赋值，以及[实验指导二中物理内存探测](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-2/guide/part-2.html)小节）。因此接下来我们需要调整程序的内存布局，改变它的链接地址。
 
@@ -130,7 +130,7 @@ write(1, "Hello, world!\n", 14)         = 14
 >
 >  内存布局，也就是指这些段各自所放的位置。一种典型的内存布局如下：
 >
->  ![../_images/MemoryLayout.png](http://wyfcyx.gitee.io/rcore-tutorial-book-v3/_images/MemoryLayout.png)
+>  ![../_images/MemoryLayout.png](F:\rCoreBook\hm1229.github.io\book\资源文件\实验零.assets\MemoryLayout.png)
 >
 >  代码部分只有代码段 `.text` 一个段，存放程序的所有汇编代码。
 >

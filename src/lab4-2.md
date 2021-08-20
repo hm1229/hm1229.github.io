@@ -1,6 +1,6 @@
 # 方案解析
 
-<img src="资源文件/实验四.assets/image-20210531145418951.png" alt="image-20210531145418951" style="zoom:50%;" />
+<img src="F:\rCoreBook\hm1229.github.io\book\资源文件\实验四.assets\image-20210531145418951.png" alt="image-20210531145418951" style="zoom:50%;" />
 
 ## 进程
 

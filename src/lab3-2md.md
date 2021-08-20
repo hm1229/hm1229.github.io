@@ -38,13 +38,13 @@
 
 我们可以说这个映射的**维护**是操作系统在做，但是大量频繁的访存不可能全部通过调用操作系统的接口来获取真实的物理地址。所以，这里硬件也会参与，帮我们快速**查询**操作系统维护的映射，而这个机制就是页表。
 
-![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/rcore_memory_layout.png)
+![img](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\rcore_memory_layout.png)
 
 如上图所示，这里的图表示了非教学版 rCore 的虚拟地址和物理地址的映射关系。可以看到内核的数据放在了一段高虚拟地址空间，然后会映射到 0x80200000 开始的一段低物理地址空间；而所有的用户程序，将通过操作系统维护的页表映射到不同的物理空间。当然，这只是非教学版 rCore 的设计，在本教程中 kernel layout 和 user layout 会和图有些出入，具体细节可以翻看 `linker script`。
 
 #### Sv39
 
-![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_address.png)
+![img](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\sv39_address.png)
 
 页表的设计和接口会有很多种，这里我们选择 RISC-V 本身硬件支持的 Sv39 模式作为页表的实现。
 
@@ -58,7 +58,7 @@ Sv39 模式同样是基于页的，在物理内存那一节曾经提到**物理�
 
 #### 页表项
 
-![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_pte.jpg)
+![img](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\sv39_pte.jpg)
 
 一个**页表项（PTE，Page Table Entry）**是用来描述一个虚拟页号如何映射到物理页号的。如果一个虚拟页号通过某种手段找到了一个页表项，并通过读取上面的物理页号完成映射，我们称这个虚拟页号通过该页表项完成映射的。
 
@@ -106,7 +106,7 @@ Sv39 模式同样是基于页的，在物理内存那一节曾经提到**物理�
 - 把virtual_page_number0 作为偏移在一级页表的物理页中找到要访问位置的物理页号；
 - 物理页号对应的物理页基址加上offset 就是虚拟地址对应的物理地址。
 
-上述流程也可以用下图表示： ![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_pagetable.jpg)
+上述流程也可以用下图表示： ![img](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\sv39_pagetable.jpg)
 
 我们通过这种复杂的手段，终于从虚拟页号找到了一级页表项，从而得出了物理页号。刚才我们提到若页表项满足 `R,W,X` 都为 0，表明这个页表项指向下一级页表。在这里三级和二级页表项的 `R,W,X` 为 0 应该成立，因为它们指向了下一级页表。
 
@@ -116,13 +116,13 @@ Sv39 模式同样是基于页的，在物理内存那一节曾经提到**物理�
 
 简单起见，假设 n=3 。那么我们可能会建立这样一颗 **字典树** (Trie) ：
 
-![../_images/trie.png](https://rcore-os.github.io/rCore-Tutorial-Book-v3/_images/trie.png)
+![../_images/trie.png](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\trie.png)
 
 字典树由若干个节点（图中用椭圆形来表示）组成，从逻辑上而言每个节点代表一个可能的字符串前缀。每个节点的存储内容 都只有三个指针，对于蓝色的非叶节点来说，它的三个指针各自指向一个子节点；而对于绿色的叶子节点来说，它的三个指针不再指向 任何节点，而是具体保存一种可能的长度为 n 的字符串的计数。这样，对于题目要求的两种操作，我们只需根据输入的 字符串中的每个字符在字典树上自上而下对应走出一步，最终就能够找到字典树中维护的它的计数。之后我们可以将其直接返回或者 加一。
 
 注意到如果某些字符串自始至终没有被插入，那么一些节点没有存在的必要。反过来说一些节点是由于我们插入了一个以它对应的字符串 为前缀的字符串才被分配出来的。如下图所示：
 
-![../_images/trie-1.png](https://rcore-os.github.io/rCore-Tutorial-Book-v3/_images/trie-1.png)
+![../_images/trie-1.png](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\trie-1.png)
 
 一开始仅存在一个根节点。在我们插入字符串 `acb` 的过程中，我们只需要分配 `a` 和 `ac` 两个节点。 注意 `ac` 是一个叶节点，它的 `b` 指针不再指向另外一个节点而是保存字符串 `acb` 的计数。 此时我们无法访问到其他未分配的节点，如根节点的 `b/c` 或是 `a` 节点的 `a/b` 均为空指针。 如果后续再插入一个字符串，那么 **至多分配两个新节点** ，因为如果走的路径上有节点已经存在，就无需重复分配了。 这可以说明，字典树中节点的数目（或者说字典树消耗的内存）是随着插入字符串的数目逐渐线性增加的。
 
@@ -134,7 +134,7 @@ Sv39 模式同样是基于页的，在物理内存那一节曾经提到**物理�
 
 页表的基址（起始地址）一般会保存在一个特殊的寄存器中。在 RISC-V 中，这个特殊的寄存器就是页表寄存器 satp。
 
-![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_satp.jpg)
+![img](F:\rCoreBook\hm1229.github.io\book\资源文件\实验三.assets\sv39_satp.jpg)
 
 我们使用寄存器 `satp` 来控制 CPU 进行页表映射。
 

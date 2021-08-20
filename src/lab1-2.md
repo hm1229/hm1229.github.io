@@ -2,7 +2,7 @@
 
 中断机制是操作系统内核中首先应该实现的功能，它是操作系统所有功能的基础。如果一个操作系统没有中断管理模块，操作系统在唤起用户程序后只能等待用户程序完成才可以继续执行其他的任务，那么它的系统的其他资源将完全无法调度。
 
-![image-20210817124930340](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20210817124930340.png)
+![image-20210817124930340](F:\rCoreBook\hm1229.github.io\book\资源文件\实验一.assets\image-20210531141510157.png)
 
 ## 什么是中断
 
@@ -20,7 +20,7 @@
 
 ### 中断的种类
 
-<img src="C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20210817112251223.png" alt="image-20210817112251223"  />
+<img src="F:\rCoreBook\hm1229.github.io\book\资源文件\实验一.assets\image-20210817112251223.png" alt="image-20210817112251223"  />
 
 #### 异常（Exception）
 
