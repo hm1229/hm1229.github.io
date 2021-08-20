@@ -136,7 +136,7 @@
                     <main>
                         <h1 id="方案解析"><a class="header" href="#方案解析">方案解析</a></h1>
 <img src="./资源文件/实验七.assets/流程图.png" alt="image-20210531141431138" style="zoom:50%;" />
-<p>使用<code>top.rs</code>制造负载，并调用<code>monitor.rs</code>监控程序，<code>monitor</code>程序调用<code>sys_read</code>这个系统调用，<code>sys_read</code>将从<code>TaskControlBlock</code>中获取到的想要监控的内容通过<code>json</code>格式传递回<code>monitor</code>，<code>monitor</code>对这些信息进行解析后输出。成果如下：</p>
+<p>使用性能监测应用制造负载，并调用监测主控程序，监测主控程序向内核发起读取数据请求，<code>sys_read</code>从<code>TaskControlBlock</code>中获取到的想要监控的内容，然后将其通过<code>json</code>格式传递回监测主控程序，由监测主控程序对这些信息进行解析后输出。</p>
 <img src="./资源文件/实验七.assets/成果展示.png" alt="image-20210531141431138" style="zoom:100%;" />
 <p>监控程序将持续监控40s后退出。</p>
 

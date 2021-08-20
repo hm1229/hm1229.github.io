@@ -8631,7 +8631,7 @@ serde = { version = &quot;1.0&quot;,default-features = false,  features = [&quot
 <p>用户态从缓冲区中取出文本形式的<code>json</code>数据之后，使用<code>serde_json</code>库，将缓冲区内的字节变回<code>utf8</code>文本，再从<code>utf8</code>文本还原回<code>json</code>文本，再将<code>json</code>文本变回<code>rust</code>结构体。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="方案解析-6"><a class="header" href="#方案解析-6">方案解析</a></h1>
 <img src="./资源文件/实验七.assets/流程图.png" alt="image-20210531141431138" style="zoom:50%;" />
-<p>使用<code>top.rs</code>制造负载，并调用<code>monitor.rs</code>监控程序，<code>monitor</code>程序调用<code>sys_read</code>这个系统调用，<code>sys_read</code>将从<code>TaskControlBlock</code>中获取到的想要监控的内容通过<code>json</code>格式传递回<code>monitor</code>，<code>monitor</code>对这些信息进行解析后输出。成果如下：</p>
+<p>使用性能监测应用制造负载，并调用监测主控程序，监测主控程序向内核发起读取数据请求，<code>sys_read</code>从<code>TaskControlBlock</code>中获取到的想要监控的内容，然后将其通过<code>json</code>格式传递回监测主控程序，由监测主控程序对这些信息进行解析后输出。</p>
 <img src="./资源文件/实验七.assets/成果展示.png" alt="image-20210531141431138" style="zoom:100%;" />
 <p>监控程序将持续监控40s后退出。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤-7"><a class="header" href="#实验步骤-7">实验步骤</a></h1>

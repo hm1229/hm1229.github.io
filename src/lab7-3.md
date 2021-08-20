@@ -2,7 +2,7 @@
 
 <img src="./资源文件/实验七.assets/流程图.png" alt="image-20210531141431138" style="zoom:50%;" />
 
-使用`top.rs`制造负载，并调用`monitor.rs`监控程序，`monitor`程序调用`sys_read`这个系统调用，`sys_read`将从`TaskControlBlock`中获取到的想要监控的内容通过`json`格式传递回`monitor`，`monitor`对这些信息进行解析后输出。成果如下：
+使用性能监测应用制造负载，并调用监测主控程序，监测主控程序向内核发起读取数据请求，`sys_read`从`TaskControlBlock`中获取到的想要监控的内容，然后将其通过`json`格式传递回监测主控程序，由监测主控程序对这些信息进行解析后输出。
 
 <img src="./资源文件/实验七.assets/成果展示.png" alt="image-20210531141431138" style="zoom:100%;" />
 
