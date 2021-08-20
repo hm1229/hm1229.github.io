@@ -509,7 +509,7 @@ src/process/processor.rs:87: 'all threads terminated, shutting down'
 <p>输出部分，我们将结果保存到变量 <code>ret</code> 中，限制条件 <code>{x10}</code> 告诉编译器使用寄存器 <code>x10</code>（即 <code>a0</code> 寄存器），前面的 <code>=</code> 表明汇编代码会修改该寄存器并作为最后的返回值。</p>
 <p>输入部分，我们分别通过寄存器 <code>x10</code>、<code>x11</code>、<code>x12</code> 和 <code>x17</code>（这四个寄存器又名 <code>a0</code>、<code>a1</code>、<code>a2</code> 和 <code>a7</code>） 传入参数 <code>arg0</code>、<code>arg1</code>、<code>arg2</code> 和 <code>which</code> ，其中前三个参数分别代表接口可能所需的三个输入参数，最后一个 <code>which</code> 用来区分我们调用的是哪个接口（SBI Extension ID）。这里之所以提供三个输入参数是为了将所有接口囊括进去，对于某些接口有的输入参数是冗余的，比如 <code>sbi_console_putchar</code> 由于只需一个输入参数，它就只关心寄存器 <code>a0</code> 的值。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="方案解析"><a class="header" href="#方案解析">方案解析</a></h1>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E9%9B%B6.assets%5C%E6%96%B9%E6%A1%88%E8%A7%A3%E6%9E%90lab0.png" alt="image-20210819233010663" /></p>
+<img src="资源文件\实验零.assets\方案解析lab0.png" alt="image-20210817112251223"  />
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤"><a class="header" href="#实验步骤">实验步骤</a></h1>
 <h2 id="创建-rust-项目"><a class="header" href="#创建-rust-项目">创建 Rust 项目</a></h2>
 <h3 id="准备"><a class="header" href="#准备">准备</a></h3>
@@ -1727,7 +1727,7 @@ panic: 'end of rust_main'
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="知识储备-1"><a class="header" href="#知识储备-1">知识储备</a></h1>
 <p>中断机制是操作系统内核中首先应该实现的功能，它是操作系统所有功能的基础。如果一个操作系统没有中断管理模块，操作系统在唤起用户程序后只能等待用户程序完成才可以继续执行其他的任务，那么它的系统的其他资源将完全无法调度。</p>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E4%B8%80.assets%5Cimage-20210531141510157.png" alt="image-20210817124930340" /></p>
+<img src=".\资源文件\实验一.assets\image-20210531141510157.png" alt="image-2022251223"  />
 <h2 id="什么是中断"><a class="header" href="#什么是中断">什么是中断</a></h2>
 <p>中断是指计算机运行过程中，当出现某些意外情况需CPU干预时，计算机能自动停止正在运行的用户程序并保留现场后转入处理新情况（中断程序），处理完毕后又返回原被暂停的用户程序继续运行。</p>
 <h3 id="一个比喻"><a class="header" href="#一个比喻">一个比喻</a></h3>
@@ -1848,14 +1848,13 @@ https://content.riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf<
 <li>CSR 指令（Section 2.8，p33）
 https://content.riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="方法解析"><a class="header" href="#方法解析">方法解析</a></h3>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E4%B8%80.assets%5Cimage-20210531141431138.png" alt="image-20210531141431138" /></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤-1"><a class="header" href="#实验步骤-1">实验步骤</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="方法解析"><a class="header" href="#方法解析">方法解析</a></h1>
+<img src="资源文件\实验一.assets\image-20210531141431138.png" alt="image-20210817112251223"  /><div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤-1"><a class="header" href="#实验步骤-1">实验步骤</a></h1>
 <p>对于用户程序而言，中断的处理应当是不留任何痕迹的：只要中断处理改动了一个寄存器，都可能导致原本正在运行的线程出现错误。因此，在处理中断之前，必须要保存所有可能被修改的寄存器，并且在处理完成后恢复。因此，我们需要保存所有通用寄存器，<code>sepc</code>、<code>scause</code> 和 <code>stval</code> 这三个会被硬件自动写入的 CSR 寄存器，以及 <code>sstatus</code>。因为中断可能会涉及到权限的切换，以及中断的开关，这些都会修改 <code>sstatus</code>。</p>
 <h2 id="保存进程上下文"><a class="header" href="#保存进程上下文">保存进程上下文</a></h2>
 <p>从执行中的程序的角度来讲，该程序不应该感知到操作系统发生了中断。这需要在中断前后维持系统的上下文不变。</p>
 <p>创造一个结构体变量Context，使其来存储进程上下文所用到的寄存器信息。但只存储信息还不够，还需要对信息进行保存与恢复。由于涉及到寄存器的操作，由于不能用Rust语言直接完成，在这里将使用汇编语言，将寄存器的值存储在Context中，如图。</p>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E4%B8%80.assets%5Cimage-20210531141510157.png?lastModify=1629443459" alt="image-20210530231136855" /></p>
+<img src="资源文件\实验一.assets\image-20210531141510157.png" alt="image-20210817112251223"  />
 <p>上文已经成功存储了中断时的上下文信息，但为了能够主动的处理中断，还应编写一个负责识别和处理中断的函数。使用汇编将Context当部分信息，取代的是将堆栈指针指向由进程处理程序所使用的临时堆栈</p>
 <p>3）对进程中断所进行的操作均由进程处理程序负责处理，作为操作系统的服务例程，可以为所有的进程中断使用</p>
 <p>4）例程结束后，调用特定过程完成剩下的操作。</p>
@@ -2546,7 +2545,7 @@ Hello rCore-Tutorial!
 <p><strong>动态分配</strong>就是指应用不仅在自己的地址空间放置那些 自编译期开始就大小固定、用于静态内存分配的逻辑段（如全局数据段、栈段），还另外放置一个大小可以随着应用的运行动态增减 的逻辑段，它的名字叫做堆。同时，应用还要能够将这个段真正管理起来，即支持在运行的时候从里面分配一块空间来存放变量，而 在变量的生命周期结束之后，这块空间需要被回收以待后面的使用。如果堆的大小固定，那么这其实就是一个连续内存分配问题， 我们课上所介绍到的那些算法都可以随意使用。取决于应用的实际运行状况，每次分配的空间大小可能会有不同，因此也会产生外碎片。 如果在某次分配的时候发现堆空间不足，我们并不会像上一小节介绍的那样移动变量的存放位置让它们紧凑起来从而释放间隙用来分配 （事实上它很难做到这一点）， 一般情况下应用会直接通过系统调用，来向内核请求增加它地址空间内堆的大小，之后 就可以正常分配了。当然，这一类系统调用也能缩减堆的大小。</p>
 <p>所以使用Linux经典的动态内存分配算法——伙伴系统（Buddy System）来帮助进行内存的分配。需要声明的一点是，其实操作系统一般不会以字节为单位的分配内存，通常操作系统以页作为分配内存的单位。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="方案解析-1"><a class="header" href="#方案解析-1">方案解析</a></h1>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E4%BA%8C.assets%5Cimage-20210531142737165.png" alt="image-20210531142737165" /></p>
+<img src="资源文件\实验二.assets\image-20210531142737165.png" alt="image-20210817112251223"  />
 <p>如果不想被物理内存限制软件的大小，那么必须要实现内存的动态分配。要想实现动态分配，物理内存首先需要选择一种算法来对选择使用伙伴系统来进行内存分配。</p>
 <p>在开发的过程中引用了关于伙伴系统的相关依赖。来配合进行内存的分配。主要进行相关的初始化，并为其分配内存空间，就可以进行相关调用。</p>
 <p>实际上分配物理内存并不以字节为单位，而是以物理页作为单位。有了分配系统，就可以对物理页的概念进行封装，对每一个物理页帧进行标识。</p>
@@ -3819,16 +3818,12 @@ PhysicalAddress(0x80a1e000) and PhysicalAddress(0x80a1f000)
 <li>
 <p><code>R,W,X</code> 分别表示是否可读（Readable）、可写（Writable）和可执行（Executable）。</p>
 <ul>
-<li>
-<p>以 <code>W</code> 这一位为例，如果为零表示不可写，那么如果一条 <code>store</code> 的指令，它通过这个页表项完成了虚拟页号到物理页号的映射，找到了物理地址。但是仍然会报出异常，是因为这个页表项规定如果物理地址是通过它映射得到的，执行的行为和页表描述的状态并不一致。</p>
-</li>
-<li>
-<p>同时，根据 <code>R,W,X</code> 取值的不同，我们还有一些特别表示和约定：</p>
-<p><img src="https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_rwx.jpg" alt="img" /></p>
-</li>
-<li>
-<p>也就是说，如果 <code>R,W,X</code> 均为 0，文档上说这表示这个页表项指向下一级页表，我们先暂时记住就好。</p>
-</li>
+<li>以 <code>W</code> 这一位为例，如果为零表示不可写，那么如果一条 <code>store</code> 的指令，它通过这个页表项完成了虚拟页号到物理页号的映射，找到了物理地址。但是仍然会报出异常，是因为这个页表项规定如果物理地址是通过它映射得到的，执行的行为和页表描述的状态并不一致。</li>
+<li>同时，根据 <code>R,W,X</code> 取值的不同，我们还有一些特别表示和约定：</li>
+</ul>
+<img src="https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_rwx.jpg" alt="image-20210531141431138" style="zoom:130%;" />
+<ul>
+<li>也就是说，如果 <code>R,W,X</code> 均为 0，文档上说这表示这个页表项指向下一级页表，我们先暂时记住就好。</li>
 </ul>
 </li>
 <li>
@@ -3888,8 +3883,7 @@ PhysicalAddress(0x80a1e000) and PhysicalAddress(0x80a1f000)
 <p>但如果修改了 <code>satp</code> 寄存器，说明 OS 切换到了一个与先前映射方式完全不同的页表。此时快表里面存储的映射已经失效了，这种情况下 OS 要在修改 <code>satp</code> 的指令后面马上使用 <code>sfence.vma</code> 指令刷新整个 TLB。</p>
 <p>同样，我们手动修改一个页表项之后，也修改了映射，但 TLB 并不会自动刷新，我们也需要使用 <code>sfence.vma</code> 指令刷新 TLB。如果不加参数的，<code>sfence.vma</code> 会刷新整个 TLB。你可以在后面加上一个虚拟地址，这样 <code>sfence.vma</code> 只会刷新这个虚拟地址的映射。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="方案解析-2"><a class="header" href="#方案解析-2">方案解析</a></h1>
-<p><img src="%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%5C%E5%AE%9E%E9%AA%8C%E4%B8%89.assets%5Cimage-20210531143257676.png" alt="image-20210531143257676" /></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤-3"><a class="header" href="#实验步骤-3">实验步骤</a></h1>
+<img src="资源文件\实验三.assets\image-20210531143257676.png" alt="image-20210531141431138" style="zoom:50%;" /><div style="break-before: page; page-break-before: always;"></div><h1 id="实验步骤-3"><a class="header" href="#实验步骤-3">实验步骤</a></h1>
 <h3 id="修改内核"><a class="header" href="#修改内核">修改内核</a></h3>
 <p>之前的内核实现并未使能页表机制，实际上内核是直接在物理地址空间上运行的。这样虽然比较简单，但是为了后续能够支持多个用户进程能够在内核中并发运行，满足隔离等性质，我们要先运用学过的页表知识，把内核的运行环境从物理地址空间转移到虚拟地址空间，为之后的功能打好铺垫。</p>
 <p>更具体的，我们现在想将内核代码放在虚拟地址空间中以 0xffffffff80200000 开头的一段高地址空间中。这意味着原来放在 0x80200000 起始地址的全部内核结构被平移到了 0xffffffff80200000 的地址上，即映射关系为：虚拟地址减去偏移量 0xffffffff00000000 为原来的物理地址。当然，这种线性平移并不是唯一的映射方式，但是至少现在，内核的全部代码和数据所在的虚拟空间和物理空间是这样的线性映射。</p>

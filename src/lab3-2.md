@@ -69,10 +69,9 @@ Sv39 模式同样是基于页的，在物理内存那一节曾经提到**物理�
 - `R,W,X` 分别表示是否可读（Readable）、可写（Writable）和可执行（Executable）。
 
   - 以 `W` 这一位为例，如果为零表示不可写，那么如果一条 `store` 的指令，它通过这个页表项完成了虚拟页号到物理页号的映射，找到了物理地址。但是仍然会报出异常，是因为这个页表项规定如果物理地址是通过它映射得到的，执行的行为和页表描述的状态并不一致。
-
   - 同时，根据 `R,W,X` 取值的不同，我们还有一些特别表示和约定：
 
-    ![img](https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_rwx.jpg)
+  <img src="https://rcore-os.github.io/rCore-Tutorial-deploy/docs/lab-3/pics/sv39_rwx.jpg" alt="image-20210531141431138" style="zoom:130%;" />
 
   - 也就是说，如果 `R,W,X` 均为 0，文档上说这表示这个页表项指向下一级页表，我们先暂时记住就好。
 
